@@ -8,5 +8,17 @@
     <strong class="block font-medium mb-1">Kierunek:</strong>
     <%= group.field.nazwa %>
   </div>
+  <div>
+    <strong class="block font-medium mb-1">Przedmioty:</strong>
+    <% group.courses.each do |c| %>
+      <%= c.nazwa %> <br>
+    <% end %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Studenci:</strong>
+    <% group.students.each do |s| %>
+      <%= s.imie %> <%= s.nazwisko %> <br>
+    <% end %>
+  </div>
 </div>
 </div>
