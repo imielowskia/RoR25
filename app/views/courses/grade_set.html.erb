@@ -3,35 +3,30 @@
 <div class="container mx-auto px-4">
   <div class="flex items-center justify-between mb-6">
     <h1 class="font-bold text-2xl sm:text-4xl mr-4"><%= @course.nazwa %> oceny dla <%= @group.nazwa %></h1>
-    <%= link_to "Oceń", grade_set_path(@course.id, @group.id), class: "button0 inline-block" %>
-  </div>
 
+  </div>
+  <%= form_with url: grade_save_path do |form| %>
   <div class="mx-auto w-full max-w-4xl mt-4">
     <div class="overflow-x-auto">
       <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
+        <thead class="bg-gray-50 text-left">
           <tr>
             <th>Student</th>
             <th>Ocena</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-        <%= form_with url: grade_save_path do |form| %>
+
           <% @students.each do |s| %>
             <tr>
               <td><%= @grades[s.id]['imie'] %> <%= @grades[s.id]['nazwisko'] %></td>
-              <td><%= form.number_field 'oceny['+s.id.to_s+']', value: @grades[s.id]['grade'] %></td>
+              <td><%= form.number_field 'oceny['+s.id.to_s+']', value: @grades[s.id]['grade'], class: "text-left"%></td>
             </tr>
-          <% end %>
-          <tr>
-            <td colspan="2" class="text-right">
-              <%= form.submit "Zapisz", class: "button0" %>
-            </td>
-          </tr>
-
           <% end %>
         </tbody>
       </table>
     </div>
   </div>
+    <%= form.submit "Zapisz", class: "button0" %>
+  <% end %>
 </div>

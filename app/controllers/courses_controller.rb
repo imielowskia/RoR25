@@ -42,12 +42,12 @@ class CoursesController < ApplicationController
     @grades = []
     @students.each do |s|
       grade = s.grades.where(course_id: @course.id).order(:student_id).first
-      if !grade
-        xgr = ""
+      unless grade
+        xgrade = ""
       else
-        xgr = grade.grade
+        xgrade = grade.grade
       end
-      @grades[s.id] = {'imie'=>s.imie, 'nazwisko'=>s.nazwisko, 'grade'=>xgr}
+      @grades[s.id] = {'imie'=>s.imie, 'nazwisko'=>s.nazwisko, 'grade'=>xgrade}
     end
   end
 
