@@ -1,0 +1,37 @@
+<% content_for :title, "Oceny cząstkowe" %>
+
+<div class="container mx-auto px-4">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="font-bold text-2xl sm:text-4xl mr-4"><%= @course.nazwa %> oceny dla <%= @group.nazwa %></h1>
+
+  </div>
+  <%= form_with url: grade_details_save_path do |form| %>
+    <div class="mx-auto w-full max-w-4xl mt-4">
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50 text-left">
+          <tr>
+            <th>Student</th>
+            <th>Oceny</th>
+          </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+
+          <% @students.each do |s| %>
+            <tr>
+              <td><%= @details[s.id]['imie'] %> <%= @details[s.id]['nazwisko'] %></td>
+              <td>
+                <% @details[s.id]['details'].each do |d| %>
+                  <%= form.number_field 'oceny['+s.id.to_s+']['+d['id'].to_s+']', value: d['grade'], class: "text-left"%><br>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <%= form.submit "Zapisz", class: "button0" %>
+  <% end %>
+
+</div>

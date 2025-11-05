@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[ show edit update destroy grade grade_set grade_save   ]
+  before_action :set_course, only: %i[ show edit update destroy grade grade_set grade_save grade_details grade_details_set grade_details_save ]
 
   # GET /courses or /courses.json
   def index
@@ -67,6 +67,73 @@ class CoursesController < ApplicationController
     end
     redirect_to grade_course_path(@course.id, @group.id)
   end
+
+  #GET /course/:id/group/:group_id/details
+  def grade_details
+    @group = Group.find(params[:group_id])
+    @students = @group.students
+    @details = []
+    @students.each do |student|
+      xgrad = []
+      details = student.grade_details.where(course_id: @course.id).all
+      if details.empty?
+          xgrad << {'id'=>'0', 'grade'=>'0'}
+      else
+        details.each do |d|
+          xgrad << {'id'=>d.id, 'grade'=>d.grade}
+        end
+      end
+      @details[student.id] = {'imie'=>student.imie, 'nazwisko'=>student.nazwisko, 'details'=>xgrad}
+    end
+  end
+
+
+    #GET /course/:id/group/:group_id/grade_details
+    def grade_details_set
+      @group = Group.find(params[:group_id])
+      @students = @group.students
+      @details = []
+      @students.each do |student|
+        xgrad = []
+        details = student.grade_details.where(course_id: @course.id).all
+        if not details.empty?
+          details.each do |d|
+            xgrad << {'id'=>d.id, 'grade'=>d.grade}
+          end
+        end
+        xgrad << {'id'=>'0', 'grade'=>'0'}
+        @details[student.id] = {'imie'=>student.imie, 'nazwisko'=>student.nazwisko, 'details'=>xgrad}
+      end
+    end
+
+
+
+#POST /course/:id/group/:group_id/grade_details_save
+def grade_details_save
+  @group = Group.find(params[:group_id])
+  oceny = params['oceny']
+  @group.students.each do |student|
+    #student.grade_details.where(course_id: @course.id).destroy_all
+    details = oceny[student.id.to_s]
+    details.each do |id, grade|
+      if grade.to_i > 0
+        if id.to_i == 0
+          gd = GradeDetail.new
+          gd.course_id = @course.id
+          gd.student_id = student.id
+          gd.grade = grade.to_i
+          gd.save
+        else
+          gd = GradeDetail.find(id.to_i)
+          gd.grade = grade.to_i
+          gd.save
+        end
+    end
+   end
+  end
+  redirect_to grade_details_course_path(@course.id, @group.id)
+
+end
 
   # POST /courses or /courses.json
   def create
