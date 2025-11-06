@@ -22,68 +22,67 @@ class CoursesController < ApplicationController
   # GET /course/:id/group/:group_id
   def grade
     @group = Group.find(params[:group_id])
-    @students = @group.students
-    @grades = []
+    # sortuj studentów dla stabilnego wyświetlania
+    @students = @group.students.order(:nazwisko, :imie)
+    @grades = {}
     @students.each do |s|
       grade = s.grades.where(course_id: @course.id).order(:student_id).first
-      if !grade
-        xgr = ""
-      else
-        xgr = grade.grade
-      end
-      @grades[s.id] = {'imie'=>s.imie, 'nazwisko'=>s.nazwisko, 'grade'=>xgr}
+      xgr = grade ? grade.grade : ""
+      @grades[s.id] = { 'imie' => s.imie, 'nazwisko' => s.nazwisko, 'grade' => xgr }
     end
   end
 
   # GET /course/:id/group/:group_id/grade
   def grade_set
     @group = Group.find(params[:group_id])
-    @students = @group.students
-    @grades = []
+    @students = @group.students.order(:nazwisko, :imie)
+    @grades = {}
     @students.each do |s|
       grade = s.grades.where(course_id: @course.id).order(:student_id).first
-      unless grade
-        xgrade = ""
-      else
-        xgrade = grade.grade
-      end
-      @grades[s.id] = {'imie'=>s.imie, 'nazwisko'=>s.nazwisko, 'grade'=>xgrade}
+      xgrade = grade ? grade.grade : ""
+      @grades[s.id] = { 'imie' => s.imie, 'nazwisko' => s.nazwisko, 'grade' => xgrade }
     end
   end
 
   # POST /course/:id/group/:group_id/save
   def grade_save
     @group = Group.find(params[:group_id])
-    oceny = params['oceny']
-    @group.students.each do |student|
-      if student.courses.where(id: @course.id).count()>0
-        student.courses.destroy(@course.id)
+    oceny = params['oceny'] || {}
+
+    ActiveRecord::Base.transaction do
+      @group.students.each do |student|
+        val = (oceny[student.id.to_s] || "").to_i
+        # jeśli wartość 0 lub pusta => usuń istniejącą ocenę
+        existing = Grade.find_by(course_id: @course.id, student_id: student.id)
+        if val <= 0
+          existing.destroy if existing
+        else
+          g = existing || Grade.new(course_id: @course.id, student_id: student.id)
+          g.grade = val
+          g.save!
+        end
       end
-      @xgr = Grade.new
-      @xgr.course_id = @course.id
-      @xgr.student_id = student.id
-      @xgr.grade = oceny[student.id.to_s].to_i
-      @xgr.save
     end
+
     redirect_to grade_course_path(@course.id, @group.id)
   end
 
   #GET /course/:id/group/:group_id/details
   def grade_details
     @group = Group.find(params[:group_id])
-    @students = @group.students
-    @details = []
+    @students = @group.students.order(:nazwisko, :imie)
+    @details = {}
     @students.each do |student|
       xgrad = []
-      details = student.grade_details.where(course_id: @course.id).all
+      details = student.grade_details.where(course_id: @course.id).order(:id)
       if details.empty?
-          xgrad << {'id'=>'0', 'grade'=>'0'}
+        xgrad << { 'id' => 0, 'grade' => 0 }
       else
         details.each do |d|
-          xgrad << {'id'=>d.id, 'grade'=>d.grade}
+          xgrad << { 'id' => d.id, 'grade' => d.grade }
         end
       end
-      @details[student.id] = {'imie'=>student.imie, 'nazwisko'=>student.nazwisko, 'details'=>xgrad}
+      @details[student.id] = { 'imie' => student.imie, 'nazwisko' => student.nazwisko, 'details' => xgrad }
     end
   end
 
@@ -91,18 +90,19 @@ class CoursesController < ApplicationController
     #GET /course/:id/group/:group_id/grade_details
     def grade_details_set
       @group = Group.find(params[:group_id])
-      @students = @group.students
-      @details = []
+      @students = @group.students.order(:nazwisko, :imie)
+      @details = {}
       @students.each do |student|
         xgrad = []
-        details = student.grade_details.where(course_id: @course.id).all
-        if not details.empty?
+        details = student.grade_details.where(course_id: @course.id).order(:id)
+        if details.present?
           details.each do |d|
-            xgrad << {'id'=>d.id, 'grade'=>d.grade}
+            xgrad << { 'id' => d.id, 'grade' => d.grade }
           end
         end
-        xgrad << {'id'=>'0', 'grade'=>'0'}
-        @details[student.id] = {'imie'=>student.imie, 'nazwisko'=>student.nazwisko, 'details'=>xgrad}
+        # dodaj jedno puste pole do formularza (id: 0 -> nowy rekord)
+        xgrad << { 'id' => 0, 'grade' => 0 }
+        @details[student.id] = { 'imie' => student.imie, 'nazwisko' => student.nazwisko, 'details' => xgrad }
       end
     end
 
@@ -111,26 +111,33 @@ class CoursesController < ApplicationController
 #POST /course/:id/group/:group_id/grade_details_save
 def grade_details_save
   @group = Group.find(params[:group_id])
-  oceny = params['oceny']
-  @group.students.each do |student|
-    #student.grade_details.where(course_id: @course.id).destroy_all
-    details = oceny[student.id.to_s]
-    details.each do |id, grade|
-      if grade.to_i > 0
-        if id.to_i == 0
-          gd = GradeDetail.new
-          gd.course_id = @course.id
-          gd.student_id = student.id
-          gd.grade = grade.to_i
-          gd.save
+  oceny = params['oceny'] || {}
+
+  ActiveRecord::Base.transaction do
+    @group.students.each do |student|
+      details = oceny[student.id.to_s] || {}
+      # details może być nil gdy formularz nie przesyła nic dla studenta
+      details.each do |id_str, grade_val|
+        next if grade_val.blank?
+        grade_i = grade_val.to_i
+        next if grade_i <= 0
+
+        id_i = id_str.to_i
+        if id_i == 0
+          gd = GradeDetail.new(course_id: @course.id, student_id: student.id, grade: grade_i)
+          gd.save!
         else
-          gd = GradeDetail.find(id.to_i)
-          gd.grade = grade.to_i
-          gd.save
+          gd = GradeDetail.find_by(id: id_i)
+          # upewnij się, że rekord należy do tego studenta i kursu
+          if gd && gd.student_id == student.id && gd.course_id == @course.id
+            gd.grade = grade_i
+            gd.save!
+          end
         end
+      end
     end
-   end
   end
+
   redirect_to grade_details_course_path(@course.id, @group.id)
 
 end
@@ -176,11 +183,11 @@ end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
-      @course = Course.find(params.expect(:id))
+      @course = Course.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def course_params
-      params.expect(course: [ :nazwa, :ects ])
+      params.require(:course).permit(:nazwa, :ects)
     end
 end
