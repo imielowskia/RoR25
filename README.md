@@ -168,7 +168,7 @@ W związku z tym potrzebne będą następujące metody w kontrolerze _Courses_:
 
 **3.5. Edycja widoków dla klasy _Course_**
 
-- edycja widoku __group.html.erb_ - dodanie przycisku do widoku ocen dla danej grupy
+- edycja widoku __course.html.erb_ - dodanie przycisku do widoku ocen dla danej grupy
 - utworzenie widoku _grade.html.erb_ - wyświetlanie ocen dla danej grupy
 - utworzenie widoku _grade_set.html.erb_ - formularz do edycji ocen dla danej grupy
 
