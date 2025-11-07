@@ -140,7 +140,7 @@ W pierwszym kroku tworzymy tabelę pośrednią podobnie jak w poprzednim przypad
 
  **3.3. Edycja kontrolera _Courses_**
  
-Koncepcja obsługi ocen polega na tym, że oceny będą dopisywane w widoku kursów, dla każdego kursy będą wypisane grupy i dodany przycisk do wywołania widoku z ocenami, następnie w tym widoku będą widoczni studenci wraz z ich ocenami oraz przycisk do edycji ocen który skieruje do formularza pozwalającego na edycję po naciśnięciu przycisku "Zapisz" użytkownik zostanie przekirowany do widoku ocen.
+Koncepcja obsługi ocen polega na tym, że oceny będą dopisywane w widoku kursów, dla każdego kursu będą wypisane grupy i dodany przycisk do wywołania widoku z ocenami tej grupy, następnie w tym widoku będą widoczni studenci wraz z ich ocenami oraz przycisk do edycji ocen, który skieruje do formularza pozwalającego na edycję, po naciśnięciu przycisku "Zapisz" użytkownik zostanie przekierowany do widoku listy ocen danej grupy.
 W związku z tym potrzebne będą następujące metody w kontrolerze _Courses_:
 - metoda _grade_ - wyświetla widok z ocenami dla danej grupy
 
