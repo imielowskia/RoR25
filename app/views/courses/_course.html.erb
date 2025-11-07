@@ -27,7 +27,7 @@
         <% course.groups.each do |g| %>
           <li class="relative flex items-center justify-between mb-6 pl-6 before:content-['•'] before:absolute before:left-0">
             <span class="mr-4"><%= g.nazwa %></span>
-            <%= link_to 'Oceny cząstkowe', grade_details_course_path(course.id, g.id), class: "button1" %>
+            <%= link_to 'Oceny cząstkowe', grade_details_course_path(course.id, g.id), class: "button1 mr-2" %>
             <%= link_to 'Oceny', grade_course_path(course.id, g.id), class: "button1" %>
           </li>
         <% end %>
