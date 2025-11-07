@@ -4,16 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d55538c1-15b1-48bf-86fa-ad9529a16d3a" name="Changes" comment="Poprawki do obsługi ocen cząstkowych">
-      <change afterPath="$PROJECT_DIR$/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img_3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img_4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img_5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img_6.png" afterDir="false" />
+    <list default="true" id="d55538c1-15b1-48bf-86fa-ad9529a16d3a" name="Changes" comment="Plik README.md">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/student.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/student.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/img.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/img_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/img_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img_3.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/img_3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img_4.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/img_4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img_5.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/img_5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img_6.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/img_6.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +78,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP": "1762510882102",
     "git-widget-placeholder": "Start-stan-aktualny",
-    "last_opened_file_path": "/home/andrzej/RubymineProjects/RoR25-1/db/migrate",
+    "last_opened_file_path": "/home/andrzej/RubymineProjects/RoR25-1/app/assets/images",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -96,6 +96,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/assets/images" />
       <recent name="$PROJECT_DIR$/db/migrate" />
       <recent name="$PROJECT_DIR$/app/views/courses" />
     </key>
@@ -317,7 +318,7 @@
       <workItem from="1762432825800" duration="1269000" />
       <workItem from="1762444299510" duration="2522000" />
       <workItem from="1762510591424" duration="159000" />
-      <workItem from="1762510819280" duration="2966000" />
+      <workItem from="1762510819280" duration="3441000" />
     </task>
     <task id="LOCAL-00001" summary="Dodanie kursów">
       <option name="closed" value="true" />
@@ -383,7 +384,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762446598676</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Plik README.md">
+      <option name="closed" value="true" />
+      <created>1762513832252</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1762513832252</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -408,7 +417,8 @@
     <MESSAGE value="Poprawki w grade" />
     <MESSAGE value="Obsługa ocen i odpowiednie widoki" />
     <MESSAGE value="Poprawki do obsługi ocen cząstkowych" />
-    <option name="LAST_COMMIT_MESSAGE" value="Poprawki do obsługi ocen cząstkowych" />
+    <MESSAGE value="Plik README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Plik README.md" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/RoR25_1@Rails_console__RoR25_1.rcov" NAME="Rails console: RoR25-1 Coverage Results" MODIFIED="1762444876947" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="RoR25-1" />

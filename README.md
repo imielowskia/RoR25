@@ -16,7 +16,7 @@
 File -> New Project   
 w polu "Extra options" wpisać: --css tailwind
 
-![img.png](img.png)
+![img.png](app/assets/images/img.png)
 
     
 **1.2. Budowa pierwszego rusztowania dla klasy _Group_**
@@ -36,7 +36,7 @@ _ostatnia klauzula tworzy powiązanie z klasą Group (klucz obcy)_
 
 - nalezy wykonać migrację do bazy danych
 - nalezy dodać relację do klasy _Group_ w pliku modelu, w klasie _Student_ wpis utworzył generator scaffold
-![img_3.png](img_3.png)
+![app/assets/images/img_3.png](app/assets/images/img_3.png)
 
 **1.3. Klasa _Fields_**
 
@@ -48,19 +48,19 @@ Tools -> Run Rails Generator : rails generate migration AddFieldToGroups field:r
 
 - w kolejnym kroku (oczywiście po migracji) należy wykonać edycję modeli _Field_ i _Group_
 
-![img_1.png](img_1.png)
+![app/assets/images/img_1.png](app/assets/images/img_1.png)
 
-![img_2.png](img_2.png)
+![app/assets/images/img_2.png](app/assets/images/img_2.png)
 - obługa relacji:
     - zmiany w kontrolerze _Students_ - do metody student_params dodajemy :field_id
-  ![img_4.png](img_4.png)
+  ![app/assets/images/img_4.png](app/assets/images/img_4.png)
     - kolejne zmiany dotyczą widoków dla klasy _Student_:
         - widok _form.html.erb - dodajemy pole wyboru dla pola field_id
-      ![img_5.png](img_5.png)
+      ![app/assets/images/img_5.png](app/assets/images/img_5.png)
       
       _na obrazku nie jest widoczny opis klasy css ale nie ma to znaczenia dla działania aplikacji_
     - zmiany w widoku _student.html.erb - dodajemy wyświetlanie nazwy grupy do której należy student
-  ![img_6.png](img_6.png)
+  ![app/assets/images/img_6.png](app/assets/images/img_6.png)
   
-**To koniec działań w ramach tej gałęzi repoytorium**     
+**To koniec działań w ramach tej gałęzi repozytorium**     
     
