@@ -1,24 +1,66 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Dokument opisuje kolejne kroki w budowie aplikacji z repozytorium
 
-Things you may want to cover:
+**1. Punt ten opisuje działania w ramach brancha "Start-stan-aktualny"**
 
-* Ruby version
+**1.1. Utworzenie aplikacji**
 
-* System dependencies
+**wersja a) - w terminalu**
+    
+    rails new Nazwa_aplikacji --css tailwind
 
-* Configuration
 
-* Database creation
+**wersja b) - w edytorze RubyMine**
 
-* Database initialization
+File -> New Project   
+w polu "Extra options" wpisać: --css tailwind
 
-* How to run the test suite
+![img.png](img.png)
 
-* Services (job queues, cache servers, search engines, etc.)
+    
+**1.2. Budowa pierwszego rusztowania dla klasy _Group_**
 
-* Deployment instructions
 
-* ...
+Tools -> Run Rails Generator : rails generate scaffold Group nazwa:string
+
+Tools -> Rake Tasks : db:migrate
+
+- można w tym momencie uruchomić serwer i sprawdzić działanie aplikacji, w przeglądarce 127.0.0.1:3000/groups 
+
+**1.3. Druga klasa _Students_**
+
+Tools -> Run Rails Generator : rails generate scaffold Student imie:string nazwisko:string album:string group:references
+
+_ostatnia klauzula tworzy powiązanie z klasą Group (klucz obcy)_
+
+- nalezy wykonać migrację do bazy danych
+- nalezy dodać relację do klasy _Group_ w pliku modelu, w klasie _Student_ wpis utworzył generator scaffold
+![img_3.png](img_3.png)
+
+**1.3. Klasa _Fields_**
+
+Tools -> Run Rails Generator : rails generate scaffold Field nazwa:string 
+
+- w następnym kroku dodajemy powiązanie z klasą Group
+
+Tools -> Run Rails Generator : rails generate migration AddFieldToGroups field:references
+
+- w kolejnym kroku (oczywiście po migracji) należy wykonać edycję modeli _Field_ i _Group_
+
+![img_1.png](img_1.png)
+
+![img_2.png](img_2.png)
+- obługa relacji:
+    - zmiany w kontrolerze _Students_ - do metody student_params dodajemy :field_id
+  ![img_4.png](img_4.png)
+    - kolejne zmiany dotyczą widoków dla klasy _Student_:
+        - widok _form.html.erb - dodajemy pole wyboru dla pola field_id
+      ![img_5.png](img_5.png)
+      
+      _na obrazku nie jest widoczny opis klasy css ale nie ma to znaczenia dla działania aplikacji_
+    - zmiany w widoku _student.html.erb - dodajemy wyświetlanie nazwy grupy do której należy student
+  ![img_6.png](img_6.png)
+  
+**To koniec działań w ramach tej gałęzi repoytorium**     
+    
