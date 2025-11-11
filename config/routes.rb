@@ -5,13 +5,13 @@ Rails.application.routes.draw do
   resources :groups
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  get 'course/:id/group/:group_id', to: 'courses#grade', as: 'grade_course'
-  get 'course/:id/group/:group_id/grade', to: 'courses#grade_set', as: 'grade_set'
-  post 'course/:id/group/:group_id/save', to: 'courses#grade_save', as: 'grade_save'
+  get 'courses/:id/groups/:group_id', to: 'courses#grade', as: 'grade_course'
+  get 'courses/:id/groups/:group_id/grade', to: 'courses#grade_set', as: 'grade_set'
+  post 'courses/:id/groups/:group_id/save', to: 'courses#grade_save', as: 'grade_save'
 
-  get 'course/:id/group/:group_id/details', to: 'courses#grade_details', as: 'grade_details_course'
-  get 'course/:id/group/:group_id/grade_details', to: 'courses#grade_details_set', as: 'grade_details_set'
-  post 'course/:id/group/:group_id/grade_details_save', to: 'courses#grade_details_save', as: 'grade_details_save'
+  get 'courses/:id/groups/:group_id/details', to: 'courses#grade_details', as: 'grade_details_course'
+  get 'courses/:id/groups/:group_id/grade_details', to: 'courses#grade_details_set', as: 'grade_details_set'
+  post 'courses/:id/groups/:group_id/grade_details_save', to: 'courses#grade_details_save', as: 'grade_details_save'
 
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
