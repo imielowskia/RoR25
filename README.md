@@ -202,7 +202,7 @@ Tym razem wygenerujemy model dla klasy _GradeDetail_ która będzie przechowywa�
   - metoda _grade_details_save_ - zapisuje oceny cząstkowe do bazy
   - metody te muszą być dodane do listy metod dla których wykonana jest metoda _before_action :set_course_
 
-4.4. Dodanie tras do pliku _config/routes.rb_
+**4.4. Dodanie tras do pliku _config/routes.rb_**
 - dodajemy trzy nowe trasy do obsługi ocen cząstkowych
 
 ![img_3.png](app/assets/images/img_25.png)
@@ -212,4 +212,38 @@ Tym razem wygenerujemy model dla klasy _GradeDetail_ która będzie przechowywa�
 - utworzenie widoku _grade_details.html.erb_ - wyświetlanie ocen cząstkowych dla danej grupy
 - utworzenie widoku _grade_details_set.html.erb_ - formularz do edycji ocen cząstkowych dla danej grupy
 
-Wszystkie pliki do sprawdzdenia w repozytorium.
+Wszystkie pliki do sprawdzenia w repozytorium.
+
+**5. Add-walidacje-itp**
+
+**5.1 Walidacje**
+Walidacje wartości wprowadzanych do bazy danych dodajemy w plikach modeli.
+
+![img.png](app/assets/images/img_26.png)
+
+Powyżej przykład walidacji atrybutu _'album'_ - musi zawierać dokładnie 5 cyfr
+
+![img_1.png](app/assets/images/img_27.png)
+A teraz walidacja atrybutu _'grade'_ - ocena musi się zawierać pomiędzy 2 a 5
+
+**5.2. Dodanie przetwarzania wartości atrybutu przed zapisem do bazy**
+
+![img_2.png](app/assets/images/img_28.png)
+Powyżej przykład przetwarzania atrybutu _'imie'_ - przed zapisaniem do bazy imię jest zamieniane na format z wielką literą na początku a pozostałe litery małe
+
+**5.3. Dodanie górnej belki z linkami to widoków w całej aplikacji**
+
+Do tego celu wykorzystamy plik _app/views/layouts/application.html.erb_ w którym są zapisane informacje o szablonie strony dla wszystkich widoków w aplikacji.
+Wygodnie jest wydzielić ten fragment kodu do osobnego pliku i wczytać go w szablonie.
+Tworzymy plik 'app/views/layouts/_header.html.erb' i umieszczamy w nim kod paska nawigacyjnego a następnie dodajemy renderowanie w pliku '_application.html.erb_'
+
+![img_3.png](app/assets/images/img_29.png)
+
+![img_4.png](app/assets/images/img_30.png)
+
+**5.4. I na koniec dodamy stronę startową aplikacji** 
+
+W pliku _config/routes.rb_ dodajemy trasę do strony startowej
+![img_5.png](app/assets/images/img_31.png)
+
+**I to na tyle w tym branchu**
