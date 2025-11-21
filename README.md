@@ -83,7 +83,7 @@ _na obrazku nie jest widoczny opis klasy css ale nie ma to znaczenia dla działa
 **2.2. Powiązanie klasy _Course_ z klasą _Group_**
     - wygenerowanie migracji tworzącej tabelę łączącą grupy z kursami (wiele do wielu)
 
-    Tools -> Run Rails Generator : rails generate migration CreateJoinTableCoursesGroups course:references group:references
+    Tools -> Run Rails Generator : rails generate migration CreateJoinTableCourseGroup course group
 
 
 - wykonujemy migrację do bazy danych
@@ -115,7 +115,7 @@ _na obrazku nie jest widoczny opis klasy css ale nie ma to znaczenia dla działa
 W tym przypadku wykorzystujemy tabelę łączącą Course i Student (podobnie jak w przypadku _Group_ i _Course_) ale musimmy ją zmodyfikować.
 W pierwszym kroku tworzymy tabelę pośrednią podobnie jak w poprzednim przypadku.
     
-    Tools -> Run Rails Generator : rails generate migration CreateJoinTableCoursesStudenrts course:references student:references
+    Tools -> Run Rails Generator : rails generate migration CreateJoinTableCourseStudent course student
 
 - wykonujemy migrację do bazy danych
 - następnie tworzymy migrację dodającą kolumnę _grade_ do tabeli łączącej i zmieniamy nazwę tabeli na Grades
