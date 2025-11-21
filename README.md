@@ -83,7 +83,7 @@ _na obrazku nie jest widoczny opis klasy css ale nie ma to znaczenia dla działa
 **2.2. Powiązanie klasy _Course_ z klasą _Group_**
     - wygenerowanie migracji tworzącej tabelę łączącą grupy z kursami (wiele do wielu)
 
-    Tools -> Run Rails Generator : rails generate migration CreateJoinTableCoursesGroups course:references group:references
+    Tools -> Run Rails Generator : rails generate migration CreateJoinTableCoursesGroups course group
 
 
 - wykonujemy migrację do bazy danych
