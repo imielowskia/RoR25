@@ -247,3 +247,15 @@ W pliku _config/routes.rb_ dodajemy trasę do strony startowej
 ![img_5.png](app/assets/images/img_31.png)
 
 **I to na tyle w tym branchu**
+
+**6. Add-Turbo-1**
+
+W tym kroku dodamy przetwarzanie formularzy z wykorzystaniem Turbo Frames aby uniknąć przeładowywania całej i ładowania fragmentów strony niezależnie.
+
+**6.1. Edycja widoków dla klasy _Course_**
+- edycja widoku __course.html.erb_ - dodanie turbo frame do widoku ocen dla danej grupy
+- edycja widoku _grade.html.erb_ - dodanie turbo frame do widoku z ocenami dla danej grupy
+- edycja widoku _grade_set.html.erb_ - dodanie turbo frame do formularza do edycji ocen dla danej grupy
+- edycja widoku _grade_details.html.erb_ - dodanie turbo frame do widoku z ocenami cząstkowymi dla danej grupy
+- edycja widoku _grade_details_set.html.erb_ - dodanie turbo frame do formularza do edycji ocen cząstkowych dla danej grupy
+- dodanie metody _blank_ do kontrolera _Courses_ aby obsłużyć żądania powrotu do listy kursów bez widoku ocen oraz trasy do pliku _config/routes.rb_, konieczne jest także dodanie widoku _blank.html.erb_

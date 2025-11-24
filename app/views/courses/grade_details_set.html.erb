@@ -4,7 +4,7 @@
   <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
 <% end %>
 
-
+<%= turbo_frame_tag "grade_course_"+@course.id.to_s do %>
 <div class="container mx-auto px-4">
   <div class="flex items-center justify-between mb-6">
     <h1 class="font-bold text-2xl sm:text-4xl mr-4"><%= @course.nazwa %> oceny dla <%= @group.nazwa %></h1>
@@ -40,3 +40,4 @@
   <% end %>
 
 </div>
+<% end %>

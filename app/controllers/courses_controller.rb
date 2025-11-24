@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[ show edit update destroy grade grade_set grade_save grade_details grade_details_set grade_details_save ]
+  before_action :set_course, only: %i[ show edit update destroy grade grade_set grade_save grade_details grade_details_set grade_details_save blank ]
 
   # GET /courses or /courses.json
   def index
@@ -139,6 +139,11 @@ def grade_details_save
   end
 
   redirect_to grade_details_course_path(@course.id, @group.id)
+
+end
+
+
+def blank
 
 end
 

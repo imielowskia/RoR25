@@ -90,10 +90,10 @@ ActiveRecord::Base.transaction do
   puts "Seeding students..."
   # Utwórz kilka studentów (album musi być unikalny)
   students_data = [
-    { album: "2025001", imie: "Jan", nazwisko: "Kowalski", group_nazwa: "INF-A" },
-    { album: "2025002", imie: "Anna", nazwisko: "Nowak", group_nazwa: "INF-A" },
-    { album: "2025003", imie: "Piotr", nazwisko: "Zalewski", group_nazwa: "MAT-A" },
-    { album: "2025004", imie: "Ewa", nazwisko: "Kaczmarek", group_nazwa: "FIZ-A" }
+    { album: "25001", imie: "Jan", nazwisko: "Kowalski", group_nazwa: "INF-A" },
+    { album: "25002", imie: "Anna", nazwisko: "Nowak", group_nazwa: "INF-A" },
+    { album: "25003", imie: "Piotr", nazwisko: "Zalewski", group_nazwa: "MAT-A" },
+    { album: "25004", imie: "Ewa", nazwisko: "Kaczmarek", group_nazwa: "FIZ-A" }
   ]
 
   created_students = {}
@@ -119,10 +119,10 @@ ActiveRecord::Base.transaction do
   # Przykladowe oceny (Grade jest tabelą bez id; używamy find_or_initialize_by)
   # Nadajemy oceny tylko tam, gdzie ma to sens.
   grades_data = [
-    { album: "2025001", course_nazwa: "Programowanie 1", grade: 5 },
-    { album: "2025002", course_nazwa: "Programowanie 1", grade: 4 },
-    { album: "2025003", course_nazwa: "Algebra", grade: 3 },
-    { album: "2025004", course_nazwa: "Fizyka I", grade: 4 }
+    { album: "25001", course_nazwa: "Programowanie 1", grade: 5 },
+    { album: "25002", course_nazwa: "Programowanie 1", grade: 4 },
+    { album: "25003", course_nazwa: "Algebra", grade: 3 },
+    { album: "25004", course_nazwa: "Fizyka I", grade: 4 }
   ]
 
   grades_data.each do |g|
@@ -138,11 +138,11 @@ ActiveRecord::Base.transaction do
   puts "Seeding grade_details..."
   # Przykładowe szczegóły ocen - tworzymy kilka wpisów z datami. Używamy find_or_initialize_by po student_id, course_id i dacie, aby seedy były idempotentne.
   grade_details_data = [
-    { album: "2025001", course_nazwa: "Programowanie 1", grade: 4.50, data: Date.today - 30 },
-    { album: "2025001", course_nazwa: "Programowanie 1", grade: 5.00, data: Date.today - 10 },
-    { album: "2025002", course_nazwa: "Programowanie 1", grade: 4.00, data: Date.today - 20 },
-    { album: "2025003", course_nazwa: "Algebra", grade: 3.50, data: Date.today - 15 },
-    { album: "2025004", course_nazwa: "Fizyka I", grade: 4.00, data: Date.today - 5 }
+    { album: "25001", course_nazwa: "Programowanie 1", grade: 4.50, data: Date.today - 30 },
+    { album: "25001", course_nazwa: "Programowanie 1", grade: 5.00, data: Date.today - 10 },
+    { album: "25002", course_nazwa: "Programowanie 1", grade: 4.00, data: Date.today - 20 },
+    { album: "25003", course_nazwa: "Algebra", grade: 3.50, data: Date.today - 15 },
+    { album: "25004", course_nazwa: "Fizyka I", grade: 4.00, data: Date.today - 5 }
   ]
 
   grade_details_data.each do |gd|
